@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Pizza Topping Generator</title>
+    <link type="text/css" rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Josefin+Sans">
+    <style>
+        body {
+            font-family: 'Josefin Sans';
+            font-size: 12.5px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Pizza Topping Generator</h1>
+    <h2>Want some toppings on your pizza but don't know what toppings?<br>Get your toppings here!</h2>
+    <hr class="break">
+
+    <h1>Tell me how many toppings you want on your pizza</h1>
+    <label for="meatCount"><h2>How many meat toppings would you like? (Maximum 8)</h2></label>
+    <hr class="break1">
+    <input id="meatCount" type="number" min="0" max="8" value="0" required placeholder="">
+    <hr class="break1">
+    <label for="veggiesCount"><h2>How many veggie toppings would you like? (Maximum 8)</h2></label> 
+    <input id="veggiesCount" type="number" min="0" max="8" value="0" required placeholder="">
+    <div class="button-cont">
+        <hr class="break1">
+        <button class="box" id="go">Generate!</button>
+    
+    </div>
+    <h1 class="meats">Meats</h2>
+    <h3 id="Meats">Meat will show here</h3>
+    <h1 class="veggies">Veggies</h2>
+    <h3 id="Veggies">Veggies will show here</h3>
+
+    <script>
+        document.getElementById("go").addEventListener("click", function() {
+            var meatCount = parseInt(document.getElementById("meatCount").value);
+            var veggiesCount = parseInt(document.getElementById("veggiesCount").value);
+            var meatToppings = ["Pepperoni", "Sausage", "Bacon", "Ham", "Chicken", 
+            "Beef", "Salami", "Prosciutto", "Turkey", "Pancetta", "Ground Pork", 
+            "Duck", "Lamb", "Chorizo", "Anchovies"];
+            var veggieToppings = ["Mushrooms", "Onions", "Peppers", "Olives",
+            "Tomatoes", "Spinach", "Garlic", "Artichokes", "Jalapenos", 
+            "Zucchini", "Arugula", "Basil", "Broccoli", "Sun-dried Tomatoes", "Eggplant"];
+        
+            var randomMeats = [];
+            var randomVeggies = [];
+            
+            if (meatCount > 0 && meatCount <= 8) {
+                while (randomMeats.length < meatCount) {
+                    var randomMeat = meatToppings[Math.floor(Math.random() * meatToppings.length)];
+                    if (!randomMeats.includes(randomMeat)) {
+                        randomMeats.push(randomMeat);
+                    }
+                }
+            }
+            
+            if (veggiesCount > 0 && veggiesCount <= 8) {
+                while (randomVeggies.length < veggiesCount) {
+                    var randomVeggie = veggieToppings[Math.floor(Math.random() * veggieToppings.length)];
+                    if (!randomVeggies.includes(randomVeggie)) {
+                        randomVeggies.push(randomVeggie);
+                    }
+                }
+            }
+            
+            document.getElementById("Veggies").textContent = randomVeggies.join(", ");
+            document.getElementById("Meats").textContent = randomMeats.join(", ");
+        });
+    </script>
+</body>
